@@ -22,6 +22,7 @@ class App extends Component {
     this.sort = this.sort.bind(this);
     this.filter = this.filter.bind(this);
     this.setToken = this.setToken.bind(this);
+    this.githubRequest = this.githubRequest.bind(this);
   }
   sort(type) {
     let direction;
@@ -51,10 +52,17 @@ class App extends Component {
       token: event.target.value
     });
   }
+  githubRequest() {
+    alert(this.state.token);
+  }
   render() {
     return (
       <div>
-        <InputToken token={this.state.token} setToken={this.setToken} />
+        <InputToken
+          token={this.state.token}
+          setToken={this.setToken}
+          githubRequest={this.githubRequest}
+        />
         <FilterSelect
           languageList={this.state.languageList}
           filter={this.filter}

@@ -1,20 +1,8 @@
 import React, { PureComponent } from "react";
 
 class InputToken extends PureComponent {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     token: ""
-  //   };
-  //   this.tokenChange = this.tokenChange.bind(this);
-  // }
-  // tokenChange(event) {
-  //   this.setState({
-  //     token: event.target.value
-  //   });
-  // }
   render() {
-    const { token, setToken } = this.props;
+    const { token, setToken, githubRequest } = this.props;
     return (
       <div>
         <input
@@ -23,13 +11,7 @@ class InputToken extends PureComponent {
           onChange={setToken}
           placeholder="github token"
         />
-        <button
-          // onClick={() => {
-          //   setToken(token);
-          // }}
-        >
-          enter
-        </button>
+        <button onClick={githubRequest}>enter</button>
       </div>
     );
   }

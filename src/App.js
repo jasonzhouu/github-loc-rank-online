@@ -4,6 +4,7 @@ import SortButton from "./components/SortButton";
 import FilterSelect from "./components/FilterSelect";
 import InputToken from "./components/InputToken";
 import LoadMoreButton from "./components/LoadMoreButton";
+import Tbody from "./components/Tbody";
 
 import extractLanguageList from "./utils/extractLanguageList";
 
@@ -31,7 +32,7 @@ class App extends Component {
     this.filter = this.filter.bind(this);
     this.setToken = this.setToken.bind(this);
     this.githubRequest = this.githubRequest.bind(this);
-    this.LoadMore = this.LoadMore.bind(this);
+    this.loadMore = this.loadMore.bind(this);
   }
   sort(type) {
     let direction;
@@ -84,9 +85,9 @@ class App extends Component {
       console.error(error);
     }
   }
-  async LoadMore() {
+  async loadMore() {
     try {
-      const { nextPage, pageLength, data } = this.state.githubLOC.load();
+      const { nextPage, pageLength, data } = await this.state.githubLOC.load();
       const repositories = [...this.state.repositories, ...data];
       const languageList = extractLanguageList(repositories);
       this.setState({
@@ -109,16 +110,30 @@ class App extends Component {
           setToken={this.setToken}
           githubRequest={this.githubRequest}
         />
-        <FilterSelect
-          languageList={this.state.languageList}
-          filter={this.filter}
-        />
-        <SortButton sort={this.sort} sortState={this.state.sort}>
-          LOC
-        </SortButton>
-        <SortButton sort={this.sort} sortState={this.state.sort}>
-          Stars
-        </SortButton>
+        <table>
+          <thead>
+            <tr>
+              <th>reponame</th>
+              <th>
+                <FilterSelect
+                  languageList={this.state.languageList}
+                  filter={this.filter}
+                />
+              </th>
+              <th>
+                <SortButton sort={this.sort} sortState={this.state.sort}>
+                  LOC
+                </SortButton>
+              </th>
+              <th>
+                <SortButton sort={this.sort} sortState={this.state.sort}>
+                  Stars
+                </SortButton>
+              </th>
+            </tr>
+          </thead>
+          <Tbody repositories={this.state.repositories}></Tbody>
+        </table>
         <LoadMoreButton page={this.state.page} loadMore={this.loadMore} />
       </div>
     );
@@ -126,3 +141,6 @@ class App extends Component {
 }
 
 export default App;
+
+// @todo: sort
+// @todo: save to local storage

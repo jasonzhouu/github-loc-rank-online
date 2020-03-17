@@ -10,7 +10,6 @@ class LoadMoreButton extends PureComponent {
     return (
       <button
         className={className}
-        disabled={whetherLastPage ? "disabled" : "none"}
         onClick={loadMore}
       >
         more

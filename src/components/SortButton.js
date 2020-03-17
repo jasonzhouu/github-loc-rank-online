@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import './SortButton.css'
+import React, { PureComponent } from "react";
+import "./SortButton.css";
 
 const SORTDIRECTION = {
-  ascending: 'ascending',
-  descending: 'descending',
+  ascending: "ascending",
+  descending: "descending"
 };
 
 class SortButton extends PureComponent {
@@ -23,7 +23,12 @@ class SortButton extends PureComponent {
       }
     }
     return (
-      <span onClick={()=>{sort(children)}} className={className}>
+      <span
+        onClick={() => {
+          sort(children);
+        }}
+        className={className}
+      >
         {children}
       </span>
     );

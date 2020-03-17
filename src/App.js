@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: "",
+      filter: "-",
       sort: {
         type: "",
         direction: ""
@@ -132,7 +132,11 @@ class App extends Component {
               </th>
             </tr>
           </thead>
-          <Tbody repositories={this.state.repositories}></Tbody>
+          <Tbody
+            repositories={this.state.repositories}
+            sort={this.state.sort}
+            filter={this.state.filter}
+          ></Tbody>
         </table>
         <LoadMoreButton page={this.state.page} loadMore={this.loadMore} />
       </div>

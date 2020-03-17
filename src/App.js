@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SortButton from "./components/SortButton";
 import FilterSelect from "./components/FilterSelect";
+import InputToken from "./components/InputToken";
 import "./App.css";
 
 class App extends Component {
@@ -15,10 +16,12 @@ class App extends Component {
       languageList: [
         { name: "javascript", count: 1 },
         { name: "java", count: 2 }
-      ]
+      ],
+      token: ""
     };
     this.sort = this.sort.bind(this);
     this.filter = this.filter.bind(this);
+    this.setToken = this.setToken.bind(this);
   }
   sort(type) {
     let direction;
@@ -43,9 +46,15 @@ class App extends Component {
       filter: event.target.value
     });
   }
+  setToken(event) {
+    this.setState({
+      token: event.target.value
+    });
+  }
   render() {
     return (
       <div>
+        <InputToken token={this.state.token} setToken={this.setToken} />
         <FilterSelect
           languageList={this.state.languageList}
           filter={this.filter}

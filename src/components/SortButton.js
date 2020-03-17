@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import './SortButton.css'
 
 const SORTDIRECTION = {
   ascending: 'ascending',
@@ -22,9 +23,9 @@ class SortButton extends PureComponent {
       }
     }
     return (
-      <button onClick={()=>{sort(children)}} className={className}>
+      <span onClick={()=>{sort(children)}} className={className}>
         {children}
-      </button>
+      </span>
     );
   }
 }

@@ -1,0 +1,17 @@
+span {
+  cursor: pointer;
+  user-select: none;
+}
+span::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+}
+span.ascending::after {
+  border-bottom-color: #00adb5;
+}
+span.descending::after {
+  border-top-color: #00adb5;
+}

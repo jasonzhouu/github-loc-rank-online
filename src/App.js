@@ -34,6 +34,14 @@ class App extends Component {
     this.githubRequest = this.githubRequest.bind(this);
     this.loadMore = this.loadMore.bind(this);
   }
+  componentDidMount() {
+    this.setState({
+      token: localStorage.getItem("token") || ""
+    });
+  }
+  componentDidUpdate() {
+    localStorage.setItem("token", this.state.token);
+  }
   sort(type) {
     let direction;
     if (this.state.sort.type === type) {

@@ -5,7 +5,7 @@ class FilterOption extends PureComponent {
     const { option } = this.props;
     return (
       <option value={option.name}>
-        {option.name} -- {option.count}
+        {option.name || 'null'} -- {option.count}
       </option>
     );
   }

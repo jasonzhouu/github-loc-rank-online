@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GithubLOC from "github-loc-rank";
 import SortButton from "./components/SortButton";
 import FilterSelect from "./components/FilterSelect";
 import InputToken from "./components/InputToken";
@@ -17,7 +18,11 @@ class App extends Component {
         { name: "javascript", count: 1 },
         { name: "java", count: 2 }
       ],
-      token: ""
+      token: "",
+      githubLOC: null,
+      repositories: [],
+      nextPage: 1,
+      pageLength: 1
     };
     this.sort = this.sort.bind(this);
     this.filter = this.filter.bind(this);
@@ -52,8 +57,38 @@ class App extends Component {
       token: event.target.value
     });
   }
-  githubRequest() {
-    alert(this.state.token);
+  async githubRequest() {
+    const githubLOC = new GithubLOC();
+    try {
+      const { nextPage, pageLength, data } = await githubLOC.init(
+        this.state.token
+      );
+      const repositories = [...this.state.repositories, ...data];
+      const languages = [
+        // Set 参考 https://stackoverflow.com/a/43665883/7218912
+        ...new Set(repositories.map(item => item.mainLanguage))
+      ];
+      let languageList = languages.map(language => {
+        return {
+          name: language,
+          count: repositories.filter(
+            repository => repository.mainLanguage === language
+          ).length
+        };
+      });
+      languageList.sort((i, j) => j.count - i.count);
+
+      this.setState({
+        githubLOC,
+        repositories,
+        languageList,
+        nextPage,
+        pageLength
+      });
+    } catch (error) {
+      // todo: error 弹窗
+      console.error(error);
+    }
   }
   render() {
     return (

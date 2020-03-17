@@ -1,0 +1,6 @@
+button.disabled {
+  display: none;
+}
+button.normal {
+  display: inline-block;
+}

@@ -3,6 +3,10 @@ import GithubLOC from "github-loc-rank";
 import SortButton from "./components/SortButton";
 import FilterSelect from "./components/FilterSelect";
 import InputToken from "./components/InputToken";
+import LoadMoreButton from "./components/LoadMoreButton";
+
+import extractLanguageList from "./utils/extractLanguageList";
+
 import "./App.css";
 
 class App extends Component {
@@ -14,20 +18,20 @@ class App extends Component {
         type: "",
         direction: ""
       },
-      languageList: [
-        { name: "javascript", count: 1 },
-        { name: "java", count: 2 }
-      ],
+      languageList: [],
       token: "",
       githubLOC: null,
       repositories: [],
-      nextPage: 1,
-      pageLength: 1
+      page: {
+        next: 1,
+        total: 1
+      }
     };
     this.sort = this.sort.bind(this);
     this.filter = this.filter.bind(this);
     this.setToken = this.setToken.bind(this);
     this.githubRequest = this.githubRequest.bind(this);
+    this.LoadMore = this.LoadMore.bind(this);
   }
   sort(type) {
     let direction;
@@ -58,35 +62,42 @@ class App extends Component {
     });
   }
   async githubRequest() {
+    // todo: 防止重复点击
     const githubLOC = new GithubLOC();
     try {
       const { nextPage, pageLength, data } = await githubLOC.init(
         this.state.token
       );
       const repositories = [...this.state.repositories, ...data];
-      const languages = [
-        // Set 参考 https://stackoverflow.com/a/43665883/7218912
-        ...new Set(repositories.map(item => item.mainLanguage))
-      ];
-      let languageList = languages.map(language => {
-        return {
-          name: language,
-          count: repositories.filter(
-            repository => repository.mainLanguage === language
-          ).length
-        };
-      });
-      languageList.sort((i, j) => j.count - i.count);
-
+      const languageList = extractLanguageList(repositories);
       this.setState({
         githubLOC,
         repositories,
         languageList,
-        nextPage,
-        pageLength
+        page: {
+          next: nextPage,
+          total: pageLength
+        }
       });
     } catch (error) {
       // todo: error 弹窗
+      console.error(error);
+    }
+  }
+  async LoadMore() {
+    try {
+      const { nextPage, pageLength, data } = this.state.githubLOC.load();
+      const repositories = [...this.state.repositories, ...data];
+      const languageList = extractLanguageList(repositories);
+      this.setState({
+        repositories,
+        languageList,
+        page: {
+          next: nextPage,
+          total: pageLength
+        }
+      });
+    } catch (error) {
       console.error(error);
     }
   }
@@ -108,6 +119,7 @@ class App extends Component {
         <SortButton sort={this.sort} sortState={this.state.sort}>
           Stars
         </SortButton>
+        <LoadMoreButton page={this.state.page} loadMore={this.loadMore} />
       </div>
     );
   }

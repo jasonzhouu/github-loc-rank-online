@@ -36,11 +36,16 @@ class App extends Component {
   }
   componentDidMount() {
     this.setState({
-      token: localStorage.getItem("token") || ""
+      token: localStorage.getItem("token") || "",
+      repositories: JSON.parse(localStorage.getItem("repositories")) || []
     });
   }
   componentDidUpdate() {
     localStorage.setItem("token", this.state.token);
+    localStorage.setItem(
+      "repositories",
+      JSON.stringify(this.state.repositories)
+    );
   }
   sort(type) {
     let direction;
@@ -154,5 +159,4 @@ class App extends Component {
 
 export default App;
 
-// @todo: sort
 // @todo: save to local storage

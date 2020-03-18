@@ -19,28 +19,18 @@ class App extends Component {
         type: "",
         direction: ""
       },
-      languageList: [],
-      token: "",
-      githubLOC: null,
-      repositories: [],
-      page: {
-        next: 1,
-        total: 1
-      }
+      // 从local storage读取数据
+      token: localStorage.getItem("token") || "",
+      repositories: JSON.parse(localStorage.getItem("repositories")) || [],
+      page: JSON.parse(localStorage.getItem("page")) || { next: 1, total: 1 },
+      languageList: JSON.parse(localStorage.getItem("languageList")) || [],
+      githubLOC: null
     };
     this.sort = this.sort.bind(this);
     this.filter = this.filter.bind(this);
     this.setToken = this.setToken.bind(this);
     this.githubRequest = this.githubRequest.bind(this);
     this.loadMore = this.loadMore.bind(this);
-  }
-  componentDidMount() {
-    this.setState({
-      token: localStorage.getItem("token") || "",
-      repositories: JSON.parse(localStorage.getItem("repositories")) || [],
-      page: JSON.parse(localStorage.getItem("page")) || { next: 1, total: 1 },
-      languageList: JSON.parse(localStorage.getItem("languageList")) || []
-    });
   }
   componentDidUpdate() {
     localStorage.setItem("token", this.state.token);

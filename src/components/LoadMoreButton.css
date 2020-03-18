@@ -1,10 +1,9 @@
 .loadMore {
-  flex-grow: 0;
+  flex: 0 0 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  height: 3.5rem;
 }
 
 .lds-ellipsis {

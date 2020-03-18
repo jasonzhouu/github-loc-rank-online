@@ -1,0 +1,16 @@
+.hint {
+  flex: 0 0 5rem;
+  color: #00adb5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.hint a {
+  color: #00adb5;
+}
+
+.hint a:hover {
+  background-color: #eeeeee;
+}

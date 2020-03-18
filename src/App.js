@@ -7,6 +7,7 @@ import FilterSelect from "./components/FilterSelect";
 import InputToken from "./components/InputToken";
 import LoadMoreButton from "./components/LoadMoreButton";
 import Tbody from "./components/Tbody";
+import Hint from "./components/Hint";
 
 import extractLanguageList from "./utils/extractLanguageList";
 
@@ -143,6 +144,7 @@ class App extends Component {
           setToken={this.setToken}
           githubRequest={this.githubRequest}
         />
+        <Hint page={this.state.page} />
         <div className="tableContent">
           <table>
             <thead>

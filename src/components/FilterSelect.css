@@ -3,4 +3,5 @@ select {
   background-color: inherit;
   border: 1px solid #00adb5;
   border-radius: 5px;
+  outline: none;
 }

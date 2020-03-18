@@ -28,6 +28,7 @@ class App extends Component {
     if (!!token && repositories.length !== 0) {
       githubLOC = new GithubLOC();
       githubLOC.restore({ page, token });
+      token = "";
     }
     this.state = {
       filter: "-",
@@ -36,7 +37,7 @@ class App extends Component {
         direction: ""
       },
       loadding: false,
-      token: "",
+      token,
       repositories,
       page,
       languageList,

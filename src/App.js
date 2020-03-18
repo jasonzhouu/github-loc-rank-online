@@ -45,16 +45,9 @@ class App extends Component {
     this.loadMore = this.loadMore.bind(this);
   }
   componentDidUpdate() {
-    localStorage.setItem("token", this.state.token);
-    localStorage.setItem(
-      "repositories",
-      JSON.stringify(this.state.repositories)
-    );
-    localStorage.setItem("page", JSON.stringify(this.state.page));
-    localStorage.setItem(
-      "languageList",
-      JSON.stringify(this.state.languageList)
-    );
+    ["token", "page", "repositories", "languageList"].forEach(item => {
+      localStorage.setItem(item, JSON.stringify(this.state[item]));
+    });
   }
   sort(type) {
     let direction;
@@ -167,5 +160,3 @@ class App extends Component {
 }
 
 export default App;
-
-// @todo: save to local storage

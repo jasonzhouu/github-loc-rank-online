@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     // 从local storage读取数据
-    let token = localStorage.getItem("token") || "";
+    let token = JSON.parse(localStorage.getItem("token")) || "";
     let page = JSON.parse(localStorage.getItem("page")) || {
       next: 1,
       total: 1
@@ -119,7 +119,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="main">
         <InputToken
           token={this.state.token}
           setToken={this.setToken}

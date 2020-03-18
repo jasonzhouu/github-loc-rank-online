@@ -1,0 +1,7 @@
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: sans-serif;
+  color: #393e46;
+}

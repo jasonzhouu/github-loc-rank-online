@@ -22,7 +22,7 @@ class App extends Component {
     let repositories = JSON.parse(localStorage.getItem("repositories")) || [];
     let languageList = JSON.parse(localStorage.getItem("languageList")) || [];
     let githubLOC = null;
-    if (!!token && page.next > 1) {
+    if (!!token && repositories.pageLength !== 0) {
       githubLOC = new GithubLOC();
       githubLOC.restore({ page, token });
     }

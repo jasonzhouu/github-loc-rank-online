@@ -36,7 +36,7 @@ class App extends Component {
         direction: ""
       },
       loadding: false,
-      token,
+      token: "",
       repositories,
       page,
       languageList,
@@ -49,7 +49,7 @@ class App extends Component {
     this.loadMore = this.loadMore.bind(this);
   }
   componentDidUpdate() {
-    ["token", "page", "repositories", "languageList"].forEach(item => {
+    ["page", "repositories", "languageList"].forEach(item => {
       localStorage.setItem(item, JSON.stringify(this.state[item]));
     });
   }
@@ -97,10 +97,12 @@ class App extends Component {
       const repositories = data;
       const languageList = extractLanguageList(repositories);
       cogoToast.success("token added");
+      localStorage.setItem("token", this.state.token);
       this.setState({
         githubLOC,
         repositories,
         languageList,
+        token: "",
         page: {
           next: nextPage,
           total: pageLength

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/github-loc-rank-online/precache-manifest.0bd8e731e66199a158007a40f1134236.js"
+  "/github-loc-rank-online/precache-manifest.5c6bc8eaea4d9359a125b7af89fc5a00.js"
 );
 
 self.addEventListener('message', (event) => {

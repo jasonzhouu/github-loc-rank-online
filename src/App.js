@@ -32,6 +32,7 @@ class App extends Component {
         type: "",
         direction: ""
       },
+      loadding: false,
       token,
       repositories,
       page,
@@ -102,6 +103,9 @@ class App extends Component {
   }
   async loadMore() {
     try {
+      this.setState({
+        loadding: true
+      });
       const { nextPage, pageLength, data } = await this.state.githubLOC.load();
       const repositories = [...this.state.repositories, ...data];
       const languageList = extractLanguageList(repositories);
@@ -111,7 +115,8 @@ class App extends Component {
         page: {
           next: nextPage,
           total: pageLength
-        }
+        },
+        loadding: false
       });
     } catch (error) {
       console.error(error);
@@ -153,7 +158,11 @@ class App extends Component {
             filter={this.state.filter}
           ></Tbody>
         </table>
-        <LoadMoreButton page={this.state.page} loadMore={this.loadMore} />
+        <LoadMoreButton
+          loadding={this.state.loadding}
+          page={this.state.page}
+          loadMore={this.loadMore}
+        />
       </div>
     );
   }

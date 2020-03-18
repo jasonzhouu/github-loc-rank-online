@@ -13,18 +13,30 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
+    // 从local storage读取数据
+    let token = localStorage.getItem("token") || "";
+    let page = JSON.parse(localStorage.getItem("page")) || {
+      next: 1,
+      total: 1
+    };
+    let repositories = JSON.parse(localStorage.getItem("repositories")) || [];
+    let languageList = JSON.parse(localStorage.getItem("languageList")) || [];
+    let githubLOC = null;
+    if (!!token && page.next > 1) {
+      githubLOC = new GithubLOC();
+      githubLOC.restore({ page, token });
+    }
     this.state = {
       filter: "-",
       sort: {
         type: "",
         direction: ""
       },
-      // 从local storage读取数据
-      token: localStorage.getItem("token") || "",
-      repositories: JSON.parse(localStorage.getItem("repositories")) || [],
-      page: JSON.parse(localStorage.getItem("page")) || { next: 1, total: 1 },
-      languageList: JSON.parse(localStorage.getItem("languageList")) || [],
-      githubLOC: null
+      token,
+      repositories,
+      page,
+      languageList,
+      githubLOC
     };
     this.sort = this.sort.bind(this);
     this.filter = this.filter.bind(this);

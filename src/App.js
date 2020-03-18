@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import GithubLOC from "github-loc-rank";
+import cogoToast from "cogo-toast";
+
 import SortButton from "./components/SortButton";
 import FilterSelect from "./components/FilterSelect";
 import InputToken from "./components/InputToken";
@@ -85,7 +87,7 @@ class App extends Component {
       const { nextPage, pageLength, data } = await githubLOC.init(
         this.state.token
       );
-      const repositories = [...this.state.repositories, ...data];
+      const repositories = data;
       const languageList = extractLanguageList(repositories);
       this.setState({
         githubLOC,
@@ -97,7 +99,7 @@ class App extends Component {
         }
       });
     } catch (error) {
-      // todo: error 弹窗
+      cogoToast.error("invalid token or failed network");
       console.error(error);
     }
   }
@@ -119,6 +121,7 @@ class App extends Component {
         loadding: false
       });
     } catch (error) {
+      cogoToast.error("invalid token or failed network");
       console.error(error);
     }
   }

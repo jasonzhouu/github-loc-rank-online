@@ -133,34 +133,36 @@ class App extends Component {
           setToken={this.setToken}
           githubRequest={this.githubRequest}
         />
-        <table>
-          <thead>
-            <tr>
-              <th>reponame</th>
-              <th>
-                <FilterSelect
-                  languageList={this.state.languageList}
-                  filter={this.filter}
-                />
-              </th>
-              <th>
-                <SortButton sort={this.sort} sortState={this.state.sort}>
-                  LOC
-                </SortButton>
-              </th>
-              <th>
-                <SortButton sort={this.sort} sortState={this.state.sort}>
-                  Stars
-                </SortButton>
-              </th>
-            </tr>
-          </thead>
-          <Tbody
-            repositories={this.state.repositories}
-            sort={this.state.sort}
-            filter={this.state.filter}
-          ></Tbody>
-        </table>
+        <div className="tableContent">
+          <table>
+            <thead>
+              <tr>
+                <th>reponame</th>
+                <th>
+                  <FilterSelect
+                    languageList={this.state.languageList}
+                    filter={this.filter}
+                  />
+                </th>
+                <th>
+                  <SortButton sort={this.sort} sortState={this.state.sort}>
+                    LOC
+                  </SortButton>
+                </th>
+                <th>
+                  <SortButton sort={this.sort} sortState={this.state.sort}>
+                    Stars
+                  </SortButton>
+                </th>
+              </tr>
+            </thead>
+            <Tbody
+              repositories={this.state.repositories}
+              sort={this.state.sort}
+              filter={this.state.filter}
+            ></Tbody>
+          </table>
+        </div>
         <LoadMoreButton
           loadding={this.state.loadding}
           page={this.state.page}

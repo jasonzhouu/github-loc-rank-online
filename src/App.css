@@ -1,8 +1,21 @@
 .main {
-  flex: 1 0 800px;
-  max-width: 800px;
+  flex: 0 0 800px;
+  display: flex;
+  flex-direction: column;
   border: 1px solid #ddd;
   padding: 1rem;
+}
+.tableContent {
+  flex-grow: 1;
+  text-align: left;
+  border-collapse: collapse;
+}
+.tableContent > table {
+  width: 100%;
+}
+.tableContent > table > thead {
+  user-select: none;
+  font-size: 1.3rem;
 }
 button {
   display: inline-block;

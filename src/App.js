@@ -37,7 +37,9 @@ class App extends Component {
   componentDidMount() {
     this.setState({
       token: localStorage.getItem("token") || "",
-      repositories: JSON.parse(localStorage.getItem("repositories")) || []
+      repositories: JSON.parse(localStorage.getItem("repositories")) || [],
+      page: JSON.parse(localStorage.getItem("page")) || { next: 1, total: 1 },
+      languageList: JSON.parse(localStorage.getItem("languageList")) || []
     });
   }
   componentDidUpdate() {
@@ -45,6 +47,11 @@ class App extends Component {
     localStorage.setItem(
       "repositories",
       JSON.stringify(this.state.repositories)
+    );
+    localStorage.setItem("page", JSON.stringify(this.state.page));
+    localStorage.setItem(
+      "languageList",
+      JSON.stringify(this.state.languageList)
     );
   }
   sort(type) {

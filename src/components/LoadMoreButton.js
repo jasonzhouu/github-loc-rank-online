@@ -10,20 +10,21 @@ class LoadMoreButton extends PureComponent {
     return (
       <div className="loadMore">
         {(function() {
+          if (loadding) {
+            return (
+              <div>
+                <div className="lds-ellipsis">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            );
+          }
           if (total !== 1) {
             if (whetherLastPage) {
               return <div>last page</div>;
-            } else if (loadding) {
-              return (
-                <div>
-                  <div className="lds-ellipsis">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
-                </div>
-              );
             } else {
               return <button onClick={loadMore}>more</button>;
             }

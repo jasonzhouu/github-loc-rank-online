@@ -6,7 +6,7 @@
   padding: 1rem;
 }
 .tableContent {
-  flex-grow: 1;
+  flex-grow: 0;
   text-align: left;
   border-collapse: collapse;
 }

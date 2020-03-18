@@ -24,7 +24,7 @@ class App extends Component {
     let repositories = JSON.parse(localStorage.getItem("repositories")) || [];
     let languageList = JSON.parse(localStorage.getItem("languageList")) || [];
     let githubLOC = null;
-    if (!!token && repositories.pageLength !== 0) {
+    if (!!token && repositories.length !== 0) {
       githubLOC = new GithubLOC();
       githubLOC.restore({ page, token });
     }
@@ -84,11 +84,18 @@ class App extends Component {
     // todo: 防止重复点击
     const githubLOC = new GithubLOC();
     try {
+      this.setState({
+        loadding: true
+      });
       const { nextPage, pageLength, data } = await githubLOC.init(
         this.state.token
       );
+      this.setState({
+        loadding: false
+      });
       const repositories = data;
       const languageList = extractLanguageList(repositories);
+      cogoToast.success("token added");
       this.setState({
         githubLOC,
         repositories,
@@ -123,6 +130,9 @@ class App extends Component {
     } catch (error) {
       cogoToast.error("invalid token or failed network");
       console.error(error);
+      this.setState({
+        loadding: false
+      });
     }
   }
   render() {

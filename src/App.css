@@ -17,6 +17,9 @@
   user-select: none;
   font-size: 1.3rem;
 }
+.tableContent > table > thead > tr > th:first-child {
+  width: 400px;
+}
 button {
   display: inline-block;
   font-weight: bolder;

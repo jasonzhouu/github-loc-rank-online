@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
+import "./FilterSelect.css";
 
 class FilterOption extends PureComponent {
   render() {
     const { option } = this.props;
     return (
       <option value={option.name}>
-        {option.name || 'null'} -- {option.count}
+        {option.name || "null"} -- {option.count}
       </option>
     );
   }

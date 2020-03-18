@@ -5,25 +5,30 @@ class LoadMoreButton extends PureComponent {
   render() {
     const { loadding, loadMore } = this.props;
     const { next, total } = this.props.page;
-    const whetherLastPage = next === total;
+    const whetherLastPage = next > total;
+
     return (
       <div className="loadMore">
-        <button
-          className={
-            whetherLastPage || loadding ? "disabledButton" : "abledButton"
+        {(function() {
+          if (total !== 1) {
+            if (whetherLastPage) {
+              return <div>last page</div>;
+            } else if (loadding) {
+              return (
+                <div>
+                  <div className="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              );
+            } else {
+              return <button onClick={loadMore}>more</button>;
+            }
           }
-          onClick={loadMore}
-        >
-          more
-        </button>
-        <div className={loadding ? "loadding" : "notLoadding"}>
-          <div className="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
+        })()}
       </div>
     );
   }

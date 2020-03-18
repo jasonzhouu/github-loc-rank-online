@@ -5,19 +5,6 @@
   box-sizing: border-box;
   height: 3.5rem;
 }
-.disabledButton {
-  display: none;
-}
-.abledButton {
-  display: inline-block;
-}
-
-.loadding {
-  display: inline-block;
-}
-.notLoadding {
-  display: none;
-}
 
 .lds-ellipsis {
   display: inline-block;

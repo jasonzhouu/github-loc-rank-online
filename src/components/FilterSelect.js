@@ -5,8 +5,8 @@ class FilterOption extends PureComponent {
   render() {
     const { option } = this.props;
     return (
-      <option value={option.name}>
-        {option.name || "null"} -- {option.count}
+      <option value={option.value}>
+        {option.value || "null"} -- {option.count}
       </option>
     );
   }
@@ -19,7 +19,7 @@ class FilterSelect extends PureComponent {
       <select onChange={filter}>
         <option value="-">--language--</option>
         {languageList.map(option => (
-          <FilterOption option={option} key={option.name} />
+          <FilterOption option={option} key={option.value || "null"} />
         ))}
       </select>
     );

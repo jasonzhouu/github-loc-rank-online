@@ -17,7 +17,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     // 从local storage读取数据
-    let token = JSON.parse(localStorage.getItem("token")) || "";
+    let token = localStorage.getItem("token") || "";
     let page = JSON.parse(localStorage.getItem("page")) || {
       next: 1,
       total: 1

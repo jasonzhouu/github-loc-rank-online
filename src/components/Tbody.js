@@ -31,7 +31,7 @@ class Tbody extends PureComponent {
               <td>
                 <a href={repository.htmlUrl}>{repository.repoName}</a>
               </td>
-              <td>{repository.mainLanguage || "-"}</td>
+              <td>{repository.mainLanguage || "null"}</td>
               <td>{repository.loc}</td>
               <td>{repository.stars}</td>
             </tr>
